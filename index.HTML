@@ -1,0 +1,703 @@
+!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D-CLIC - Le numérique dans la Francophonie</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2c3e50',
+                        secondary: '#3498db',
+                        accent: '#e74c3c',
+                        light: '#ecf0f1',
+                        dark: '#2c3e50',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-light text-dark">
+    <!-- Barre d'accessibilité -->
+
+    <div class="bg-primary text-white text-sm">
+        <div class="container mx-auto px-4 py-2 flex flex-wrap justify-between items-center">
+            <div class="flex space-x-4">
+                <button id="font-increase" class="hover:text-secondary transition-colors" aria-label="Augmenter la taille du texte">
+                    <i class="fas fa-text-height mr-1"></i>A+
+                </button>
+                <button id="font-decrease" class="hover:text-secondary transition-colors" aria-label="Diminuer la taille du texte">
+                    <i class="fas fa-text-height mr-1"></i>A-
+                </button>
+                <button id="high-contrast" class="hover:text-secondary transition-colors" aria-label="Mode contraste élevé">
+                    <i class="fas fa-adjust mr-1"></i>Contraste
+                </button>
+            </div>
+            <div class="mt-2 md:mt-0">
+                <a href="#main-content" class="hover:text-secondary transition-colors" aria-label="Aller au contenu principal">
+                    <i class="fas fa-arrow-down mr-1"></i>Aller au contenu
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header amélioré -->
+   <header class="bg-primary text-white py-4 sticky top-0 z-50 shadow-md">
+    <div class="container mx-auto px-4 md:px-6">
+        <div class="flex flex-col md:flex-row justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-white no-underline focus:outline-none focus:ring-2 focus:ring-secondary rounded">
+                <span class="sr-only">D-CLIC - Accueil</span>
+                <span aria-hidden="true" class="flex items-center">
+                    <span class="bg-white text-primary px-2 py-1 rounded-l">D</span>
+                    <span class="bg-secondary text-white px-2 py-1 rounded-r">CLIC</span>
+                </span>
+            </a>
+            
+            <!-- Menu mobile -->
+            <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none" aria-label="Menu" aria-expanded="false">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+            
+            <!-- Navigation principale -->
+            <nav id="main-nav" class="hidden md:block mt-4 md:mt-0">
+                <ul class="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-6">
+                    <li><a href="#accueil" class="text-white font-medium hover:text-secondary transition-colors py-2 px-1 block focus:outline-none focus:ring-2 focus:ring-secondary rounded">Accueil</a></li>
+                    <li><a href="#formations" class="text-white font-medium hover:text-secondary transition-colors py-2 px-1 block focus:outline-none focus:ring-2 focus:ring-secondary rounded">Formations</a></li>
+                    <li><a href="#ressources" class="text-white font-medium hover:text-secondary transition-colors py-2 px-1 block focus:outline-none focus:ring-2 focus:ring-secondary rounded">Ressources</a></li>
+                    <li><a href="#emploi" class="text-white font-medium hover:text-secondary transition-colors py-2 px-1 block focus:outline-none focus:ring-2 focus:ring-secondary rounded">Emploi</a></li>
+                    <li class="relative group">
+                        <button class="text-white font-medium hover:text-secondary transition-colors py-2 px-1 block focus:outline-none focus:ring-2 focus:ring-secondary rounded flex items-center">
+                            Inscription
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div class="absolute right-0 mt-2 w-56 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                            <div class="py-1 px-4">
+                                <div class="mb-3">
+                                    <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Nom complet</label>
+                                    <input type="text" id="name" class="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-secondary">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                                    <input type="email" id="email" class="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-secondary">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Téléphone</label>
+                                    <input type="tel" id="phone" class="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-secondary">
+                                </div>
+                                <button type="submit" class="w-full bg-secondary text-white py-2 px-4 rounded-md text-sm font-medium hover:bg-blue-600 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary">
+                                    S'inscrire
+                                </button>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+</header>
+
+
+
+    <main id="main-content">
+        <!-- Hero Section avec image locale -->
+        <section id="accueil" class="relative bg-gradient-to-r from-black/70 to-black/70 text-white py-20 text-center">
+            <div class="absolute inset-0 -z-10">
+                <img 
+                    src="/asset/oif.svg" 
+                    alt="Illustration représentant la diversité de la Francophonie numérique"
+                    class="w-full h-full object-cover"
+                    loading="lazy"
+                >
+            </div>
+            
+            <div class="container mx-auto px-4 relative z-10">
+                <h1 class="text-4xl md:text-5xl font-bold mb-4">Le numérique au service de la Francophonie</h1>
+                <p class="text-xl max-w-2xl mx-auto mb-8">
+                    D-CLIC est une initiative dédiée à promouvoir et développer les compétences numériques dans l'espace francophone.
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <a href="#formations" class="inline-block bg-secondary text-white px-6 py-3 rounded font-bold hover:bg-blue-600 transition-colors focus:outline-none focus:ring-2 focus:ring-white">
+                        Découvrir nos formations
+                    </a>
+                    
+                    <!-- Bouton modifié avec modal -->
+                    <button id="joinCommunityBtn" class="inline-block bg-accent text-white px-6 py-3 rounded font-bold hover:bg-red-700 transition-colors focus:outline-none focus:ring-2 focus:ring-white">
+                        Rejoindre la communauté
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Modal pour l'étape 1 -->
+            <div id="communityModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+                <div class="bg-white rounded-lg p-6 max-w-md w-full mx-4">
+                    <h3 class="text-2xl font-bold text-primary mb-4">Découvrez les métiers du web</h3>
+                    <div class="aspect-w-16 aspect-h-9 mb-4">
+                        <iframe id="videoFrame" class="w-full h-64" src="https://www.youtube.com/embed/fHYpSGsQ8bE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <p class="text-gray-700 mb-6">Cette vidéo vous présente les différents métiers du web. Êtes-vous intéressé pour rejoindre notre communauté ?</p>
+                    <div class="flex justify-between gap-4">
+                        <button id="notInterestedBtn" class="bg-gray-300 text-gray-800 px-4 py-2 rounded font-medium hover:bg-gray-400 transition-colors flex-1">
+                            Non, retour à l'accueil
+                        </button>
+                        <button id="interestedBtn" class="bg-secondary text-white px-4 py-2 rounded font-medium hover:bg-blue-600 transition-colors flex-1">
+                            Oui, accéder au forum
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    const joinBtn = document.getElementById('joinCommunityBtn');
+                    const modal = document.getElementById('communityModal');
+                    const notInterestedBtn = document.getElementById('notInterestedBtn');
+                    const interestedBtn = document.getElementById('interestedBtn');
+                    const videoFrame = document.getElementById('videoFrame');
+            
+                    // Étape 1: Ouvrir la modal avec la vidéo
+                    joinBtn.addEventListener('click', function() {
+                        modal.classList.remove('hidden');
+                        videoFrame.src = "https://www.youtube.com/embed/fHYpSGsQ8bE?autoplay=1";
+                    });
+            
+                    // Étape 2a: Si intéressé, aller au forum
+                    interestedBtn.addEventListener('click', function() {
+                        modal.classList.add('hidden');
+                        videoFrame.src = "";
+                        window.location.href = "#forum";
+                    });
+            
+                    // Étape 2b: Si non intéressé, retour à l'accueil
+                    notInterestedBtn.addEventListener('click', function() {
+                        modal.classList.add('hidden');
+                        videoFrame.src = "";
+                        window.location.href = "#accueil";
+                    });
+            
+                    // Fermer la modal en cliquant à l'extérieur
+                    modal.addEventListener('click', function(e) {
+                        if (e.target === modal) {
+                            modal.classList.add('hidden');
+                            videoFrame.src = "";
+                            window.location.href = "#accueil";
+                        }
+                    });
+                });
+            </script>
+            
+        </section>
+
+        <!-- Section Formations améliorée -->
+        <section id="formations" class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl md:text-4xl text-center text-primary mb-12 font-bold">Nos Formations</h2>
+                
+                <!-- Filtres de formations -->
+                <div class="mb-12 bg-light p-4 rounded-lg">
+                    <h3 class="text-xl font-bold mb-4">Filtrer les formations :</h3>
+                    <div class="flex flex-wrap gap-4">
+                        <button class="px-4 py-2 bg-secondary text-white rounded hover:bg-blue-600 transition-colors focus:outline-none focus:ring-2 focus:ring-primary">
+                            Toutes
+                        </button>
+                        <button class="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300 transition-colors focus:outline-none focus:ring-2 focus:ring-primary">
+                            Débutant
+                        </button>
+                        <button class="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300 transition-colors focus:outline-none focus:ring-2 focus:ring-primary">
+                            Intermédiaire
+                        </button>
+                        <button class="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300 transition-colors focus:outline-none focus:ring-2 focus:ring-primary">
+                            Avancé
+                        </button>
+                        <button class="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300 transition-colors focus:outline-none focus:ring-2 focus:ring-primary">
+                            Certification
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Liste des formations -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Formation 1 -->
+                    <div class="w-64 rounded-lg shadow-lg overflow-hidden">
+                      <!-- Partie bleue avec image en fond -->
+                      <div class="relative h-40 bg-cover bg-center" style="background-image: url('dev web.svg');">
+                        <span class="absolute top-2 left-2 bg-red-500 text-white text-xs px-2 py-1 rounded">Nouveau</span>
+                        <span class="absolute bottom-2 right-2 bg-white text-gray-800 text-xs px-2 py-1 rounded">20h</span>
+                      </div>
+                  
+                      <!-- Partie texte -->
+                      <div class="p-4">
+                        <h3 class="text-xl font-bold text-primary mb-2">
+                          <a href="https://www.youtube.com/results?search_query=html+debutant" target="_blank" class="hover:underline text-blue-600">
+                            Programmation Web
+                          </a>
+                        </h3>
+                        <div class="flex items-center mb-2">
+                          <span class="text-yellow-400 mr-1"><i class="fas fa-star"></i></span>
+                          <span class="text-yellow-400 mr-1"><i class="fas fa-star"></i></span>
+                          <span class="text-yellow-400 mr-1"><i class="fas fa-star"></i></span>
+                          <span class="text-yellow-400 mr-1"><i class="fas fa-star"></i></span>
+                          <span class="text-gray-300 mr-1"><i class="fas fa-star"></i></span>
+                          <span class="text-sm text-gray-600 ml-1">(24)</span>
+                        </div>
+                        <p class="text-sm text-gray-700 mb-2">Apprenez les bases du HTML, CSS et JavaScript pour créer vos premiers sites web.</p>
+                        <div class="flex justify-between items-center">
+                          <span class="text-blue-600 font-semibold">Gratuit</span>
+                          <a href="#" class="text-sm text-blue-500 hover:underline">Voir détails →</a>
+                        </div>
+                      </div>
+                    </div>
+                  
+                    <!-- Formation 2 -->
+                    <div class="w-64 rounded-lg shadow-lg overflow-hidden">
+                      <!-- Partie bleue avec image en fond -->
+                      <div class="relative h-40 bg-cover bg-center" style="background-image: url('mark dig.svg');">
+                        <span class="absolute top-2 left-2 bg-red-500 text-white text-xs px-2 py-1 rounded">Populaire</span>
+                        <span class="absolute bottom-2 right-2 bg-white text-gray-800 text-xs px-2 py-1 rounded">15h</span>
+                      </div>
+                  
+                      <!-- Partie texte -->
+                      <div class="p-4">
+                        <h3 class="text-xl font-bold text-primary mb-2">
+                          <a href="https://www.youtube.com/results?search_query=Marketing+Digital" target="_blank" class="hover:underline text-blue-600">
+                            Marketing Digital
+                          </a>
+                        </h3>
+                        <div class="flex items-center mb-2">
+                          <span class="text-yellow-400 mr-1"><i class="fas fa-star"></i></span>
+                          <span class="text-yellow-400 mr-1"><i class="fas fa-star"></i></span>
+                          <span class="text-yellow-400 mr-1"><i class="fas fa-star"></i></span>
+                          <span class="text-yellow-400 mr-1"><i class="fas fa-star"></i></span>
+                          <span class="text-gray-300 mr-1"><i class="fas fa-star"></i></span>
+                          <span class="text-sm text-gray-600 ml-1">(42)</span>
+                        </div>
+                        <p class="text-sm text-gray-700 mb-2">Maîtrisez les fondamentaux du marketing digital et des réseaux sociaux.</p>
+                        <div class="flex justify-between items-center">
+                          <span class="text-blue-600 font-semibold">Gratuit</span>
+                          <a href="#" class="text-sm text-blue-500 hover:underline">Voir détails →</a>
+                        </div>
+                      </div>
+                    </div>
+                  
+                    <!-- Formation 3 -->
+                    <div class="w-64 rounded-lg shadow-lg overflow-hidden">
+                      <!-- Partie bleue avec image en fond -->
+                      <div class="relative h-40 bg-cover bg-center" style="background-image: url('données .svg');">
+                        <span class="absolute top-2 left-2 bg-red-500 text-white text-xs px-2 py-1 rounded">Populaire</span>
+                        <span class="absolute bottom-2 right-2 bg-white text-gray-800 text-xs px-2 py-1 rounded">30h</span>
+                      </div>
+                  
+                      <!-- Partie texte -->
+                      <div class="p-4">
+                        <h3 class="text-xl font-bold text-primary mb-2">
+                          <a href="https://www.youtube.com/results?search_query=analyse+de+donn%C3%A9es" target="_blank" class="hover:underline text-blue-600">
+                            Analyse de Données
+                          </a>
+                        </h3>
+                        <div class="flex items-center mb-2">
+                          <span class="text-yellow-400 mr-1"><i class="fas fa-star"></i></span>
+                          <span class="text-yellow-400 mr-1"><i class="fas fa-star"></i></span>
+                          <span class="text-yellow-400 mr-1"><i class="fas fa-star"></i></span>
+                          <span class="text-yellow-400 mr-1"><i class="fas fa-star"></i></span>
+                          <span class="text-gray-300 mr-1"><i class="fas fa-star"></i></span>
+                          <span class="text-sm text-gray-600 ml-1">(18)</span>
+                        </div>
+                        <p class="text-sm text-gray-700 mb-2">Initiation à l'analyse de données avec Python et les outils de visualisation.</p>
+                        <div class="flex justify-between items-center">
+                          <span class="text-blue-600 font-semibold">Gratuit</span>
+                          <a href="#" class="text-sm text-blue-500 hover:underline">Voir détails →</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                      
+        </section>
+
+        <!-- Section Ressources -->
+        <section id="ressources" class="py-16 bg-light">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl md:text-4xl text-center text-primary mb-12 font-bold">Ressources Éducatives</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                    <!-- Ressource 1 -->
+                    <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow">
+                        <div class="p-6">
+                            <div class="text-4xl text-secondary mb-4">
+                                <i class="fas fa-book-open"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-primary mb-3">Guides Pratiques</h3>
+                            <p class="text-gray-700 mb-4">
+                                Téléchargez nos guides PDF sur divers sujets numériques, disponibles hors connexion.
+                            </p>
+                            <a href="#" class="text-secondary font-medium hover:underline focus:outline-none focus:ring-2 focus:ring-secondary rounded px-2">
+                                Accéder aux guides <i class="fas fa-download ml-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Ressource 2 -->
+                    <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow">
+                        <div class="p-6">
+                            <div class="text-4xl text-secondary mb-4">
+                                <i class="fas fa-video"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-primary mb-3">Vidéos Tutoriels</h3>
+                            <p class="text-gray-700 mb-4">
+                                Bibliothèque de vidéos éducatives avec sous-titres et transcriptions disponibles.
+                            </p>
+                            <a href="#" class="text-secondary font-medium hover:underline focus:outline-none focus:ring-2 focus:ring-secondary rounded px-2">
+                                Voir les vidéos <i class="fas fa-play ml-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Ressource 3 -->
+                    <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow">
+                        <div class="p-6">
+                            <div class="text-4xl text-secondary mb-4">
+                                <i class="fas fa-question-circle"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-primary mb-3">FAQ Interactive</h3>
+                            <p class="text-gray-700 mb-4">
+                                Trouvez des réponses aux questions fréquentes sur les compétences numériques.
+                            </p>
+                            <a href="#" class="text-secondary font-medium hover:underline focus:outline-none focus:ring-2 focus:ring-secondary rounded px-2">
+                                Consulter la FAQ <i class="fas fa-search ml-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Témoignages -->
+                <div class="bg-white p-8 rounded-lg shadow-md">
+                    <h3 class="text-2xl font-bold text-primary mb-6 text-center">Témoignages</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="border-l-4 border-secondary pl-4">
+                            <blockquote class="text-gray-700 italic mb-4">
+                                "Grâce aux formations D-CLIC, j'ai pu obtenir mon premier emploi dans le numérique. Les ressources sont adaptées et très pratiques."
+                            </blockquote>
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 rounded-full bg-gray-300 mr-4 overflow-hidden">
+                                    <img src="/asset /styvette.svg" alt="bercyl" class="w-full h-full object-cover">
+                                </div>
+                                <div>
+                                    <p class="font-bold">Bersyle MASSALA</p>
+                                    <p class="text-sm text-gray-600">web marketeur, école 241</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="border-l-4 border-secondary pl-4">
+                            <blockquote class="text-gray-700 italic mb-4">
+                                "La communauté D-CLIC m'a permis de trouver des collaborateurs pour mon projet. Une véritable plateforme d'échange et d'entraide."
+                            </blockquote>
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 rounded-full bg-gray-300 mr-4 overflow-hidden">
+                                    <img src="/asset /styvette.svg" alt="styvette" class="w-full h-full object-cover">
+                                </div>
+                                <div>
+                                    <p class="font-bold">steevette</p>
+                                    <p class="text-sm text-gray-600">devellopeur web</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Portail Emploi -->
+        <section id="emploi" class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl md:text-4xl text-center text-primary mb-12 font-bold">Portail d'Emploi</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-12">
+                    <div>
+                        <h3 class="text-2xl font-bold text-primary mb-4">Trouvez votre opportunité dans le numérique</h3>
+                        <p class="text-gray-700 mb-6">
+                            Notre portail met en relation les talents formés avec les entreprises partenaires à la recherche de compétences numériques.
+                        </p>
+                        <ul class="space-y-3 mb-6">
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-secondary mr-2 mt-1"></i>
+                                <span>Offres d'emploi et stages dans toute la Francophonie</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-secondary mr-2 mt-1"></i>
+                                <span>Outils pour créer CV et lettres de motivation</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-secondary mr-2 mt-1"></i>
+                                <span>Simulateurs d'entretien d'embauche</span>
+                            </li>
+                        </ul>
+                        <a href="#" class="inline-block bg-secondary text-white px-6 py-3 rounded font-bold hover:bg-blue-600 transition-colors focus:outline-none focus:ring-2 focus:ring-primary">
+                            Accéder au portail <i class="fas fa-briefcase ml-2"></i>
+                        </a>
+                    </div>
+
+                    
+                    <div class="bg-light p-8 rounded-lg shadow-md">
+                        <h4 class="text-xl font-bold text-primary mb-4">Dernières offres</h4>
+                        
+                        <div class="space-y-4">
+                            <!-- Offre 1 -->
+                            <div class="border-b border-gray-200 pb-4">
+                                <h5 class="font-bold text-lg">Développeur Front-end</h5>
+                                <div class="flex flex-wrap gap-2 my-2">
+                                    <span class="bg-gray-100 px-2 py-1 rounded text-sm">Télétravail</span>
+                                    <span class="bg-gray-100 px-2 py-1 rounded text-sm">CDI</span>
+                                </div>
+                                <p class="text-gray-600 text-sm mb-2">Société Tech, Côte d'Ivoire</p>
+                                <a href="#" class="text-secondary text-sm font-medium hover:underline focus:outline-none focus:ring-2 focus:ring-secondary rounded">
+                                    Voir l'offre <i class="fas fa-arrow-right ml-1"></i>
+                                </a>
+                            </div>
+                            
+                            <!-- Offre 2 -->
+                            <div class="border-b border-gray-200 pb-4">
+                                <h5 class="font-bold text-lg">Community Manager</h5>
+                                <div class="flex flex-wrap gap-2 my-2">
+                                    <span class="bg-gray-100 px-2 py-1 rounded text-sm">Hybride</span>
+                                    <span class="bg-gray-100 px-2 py-1 rounded text-sm">CDD</span>
+                                </div>
+                                <p class="text-gray-600 text-sm mb-2">Agence Digitale, Maroc</p>
+                                <a href="#" class="text-secondary text-sm font-medium hover:underline focus:outline-none focus:ring-2 focus:ring-secondary rounded">
+                                    Voir l'offre <i class="fas fa-arrow-right ml-1"></i>
+                                </a>
+                            </div>
+                            
+                            <!-- Offre 3 -->
+                            <div>
+                                <h5 class="font-bold text-lg">Analyste de Données</h5>
+                                <div class="flex flex-wrap gap-2 my-2">
+                                    <span class="bg-gray-100 px-2 py-1 rounded text-sm">Présentiel</span>
+                                    <span class="bg-gray-100 px-2 py-1 rounded text-sm">Stage</span>
+                                </div>
+                                <p class="text-gray-600 text-sm mb-2">ONG Internationale, Sénégal</p>
+                                <a href="#" class="text-secondary text-sm font-medium hover:underline focus:outline-none focus:ring-2 focus:ring-secondary rounded">
+                                    Voir l'offre <i class="fas fa-arrow-right ml-1"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Conseils emploi -->
+                <div class="bg-light p-8 rounded-lg shadow-md">
+                    <h3 class="text-2xl font-bold text-primary mb-6 text-center">Conseils pour votre recherche</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div>
+                            <div class="text-secondary text-3xl mb-3">
+                                <i class="fas fa-file-alt"></i>
+                            </div>
+                            <h4 class="font-bold text-lg mb-2">CV Francophone</h4>
+                            <p class="text-gray-700">
+                                Téléchargez notre modèle de CV adapté aux standards francophones.
+                            </p>
+                        </div>
+                        <div>
+                            <div class="text-secondary text-3xl mb-3">
+                                <i class="fas fa-comments"></i>
+                            </div>
+                            <h4 class="font-bold text-lg mb-2">Simulateur d'entretien</h4>
+                            <p class="text-gray-700">
+                                Entraînez-vous avec notre outil interactif d'entretien d'embauche.
+                            </p>
+                        </div>
+                        <div>
+                            <div class="text-secondary text-3xl mb-3">
+                                <i class="fas fa-network-wired"></i>
+                            </div>
+                            <h4 class="font-bold text-lg mb-2">Réseautage</h4>
+                            <p class="text-gray-700">
+                                Connectez-vous avec nos partenaires employeurs sur notre plateforme.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Forum Communautaire -->
+        <section id="forum" class="py-16 bg-light">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl md:text-4xl text-center text-primary mb-12 font-bold">Forum Communautaire</h2>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+                    <div class="lg:col-span-2">
+                        <div class="bg-white p-6 rounded-lg shadow-md mb-8">
+                            <h3 class="text-2xl font-bold text-primary mb-4">Dernières discussions</h3>
+                            
+                            <div class="space-y-6">
+                                <!-- Discussion 1 -->
+                                <div class="border-b border-gray-200 pb-6">
+                                    <div class="flex items-start mb-3">
+                                        <div class="w-10 h-10 rounded-full bg-gray-300 mr-4 overflow-hidden">
+                                            <img src="https://source.unsplash.com/random/100x100/?user1" alt="Amina K." class="w-full h-full object-cover">
+                                        </div>
+                                        <div>
+                                            <h4 class="font-bold">Problème avec le cours JavaScript</h4>
+                                            <p class="text-sm text-gray-600">Posté par Amina K. il y a 2 heures</p>
+                                        </div>
+                                    </div>
+                                    <p class="text-gray-700 mb-3">
+                                        Bonjour, je bloque sur l'exercice 3 du module JavaScript. Quelqu'un pourrait m'aider ?
+                                    </p>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-sm text-gray-600">5 réponses</span>
+                                        <a href="#" class="text-secondary text-sm font-medium hover:underline focus:outline-none focus:ring-2 focus:ring-secondary rounded px-2">
+                                            Participer <i class="fas fa-arrow-right ml-1"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                
+                                <!-- Discussion 2 -->
+                                <div class="border-b border-gray-200 pb-6">
+                                    <div class="flex items-start mb-3">
+                                        <div class="w-10 h-10 rounded-full bg-gray-300 mr-4 overflow-hidden">
+                                            <img src="https://source.unsplash.com/random/100x100/?user2" alt="Mohamed D." class="w-full h-full object-cover">
+                                        </div>
+                                        <div>
+                                            <h4 class="font-bold">Recherche collaborateur pour projet</h4>
+                                            <p class="text-sm text-gray-600">Posté par Mohamed D. il y a 1 jour</p>
+                                        </div>
+                                    </div>
+                                    <p class="text-gray-700 mb-3">
+                                        Je développe une application pour les petites entreprises et cherche un designer UI/UX.
+                                    </p>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-sm text-gray-600">3 réponses</span>
+                                        <a href="#" class="text-secondary text-sm font-medium hover:underline focus:outline-none focus:ring-2 focus:ring-secondary rounded px-2">
+                                            Participer <i class="fas fa-arrow-right ml-1"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                
+                                <!-- Discussion 3 -->
+                                <div>
+                                    <div class="flex items-start mb-3">
+                                        <div class="w-10 h-10 rounded-full bg-gray-300 mr-4 overflow-hidden">
+                                            <img src="https://source.unsplash.com/random/100x100/?user3" alt="Lucie T." class="w-full h-full object-cover">
+                                        </div>
+                                        <div>
+                                            <h4 class="font-bold">Ressources pour apprendre Python</h4>
+                                            <p class="text-sm text-gray-600">Posté par Lucie T. il y a 2 jours</p>
+                                        </div>
+                                    </div>
+                                    <p class="text-gray-700 mb-3">
+                                        Partagez vos meilleures ressources pour débuter avec Python. Merci !
+                                    </p>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-sm text-gray-600">12 réponses</span>
+                                        <a href="#" class="text-secondary text-sm font-medium hover:underline focus:outline-none focus:ring-2 focus:ring-secondary rounded px-2">
+                                            Participer <i class="fas fa-arrow-right ml-1"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white p-6 rounded-lg shadow-md">
+                            <h3 class="text-2xl font-bold text-primary mb-4">Événements à venir</h3>
+                            
+                            <div class="space-y-6">
+                                <!-- Événement 1 -->
+                                <div class="border-b border-gray-200 pb-6">
+                                    <div class="flex flex-col md:flex-row gap-4">
+                                        <div class="bg-secondary text-white p-3 rounded-lg text-center min-w-[80px]">
+                                            <div class="text-2xl font-bold">15</div>
+                                            <div class="text-sm">JUIN</div>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-bold">Webinaire : Introduction à l'IA</h4>
+                                            <p class="text-sm text-gray-600 mb-2">14h-16h (GMT) • En ligne</p>
+                                            <p class="text-gray-700">
+                                                Découvrez les bases de l'intelligence artificielle avec notre expert.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Événement 2 -->
+                                <div>
+                                    <div class="flex flex-col md:flex-row gap-4">
+                                        <div class="bg-accent text-white p-3 rounded-lg text-center min-w-[80px]">
+                                            <div class="text-2xl font-bold">22</div>
+                                            <div class="text-sm">JUIN</div>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-bold">Atelier pratique : Créer son portfolio</h4>
+                                            <p class="text-sm text-gray-600 mb-2">10h-12h (GMT) • En ligne</p>
+                                            <p class="text-gray-700">
+                                                Apprenez à présenter vos compétences et projets efficacement.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Côté droit du forum -->
+                    <div>
+                        <div class="bg-white p-6 rounded-lg shadow-md mb-8">
+                            <h3 class="text-xl font-bold text-primary mb-4">Statistiques</h3>
+                            <div class="space-y-4">
+                                <div>
+                                    <div class="flex justify-between mb-1">
+                                        <span class="font-medium">Membres</span>
+                                        <span class="font-bold">4,287</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 rounded-full h-2">
+                                        <div class="bg-secondary h-2 rounded-full" style="width: 75%"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between mb-1">
+                                        <span class="font-medium">Discussions</span>
+                                        <span class="font-bold">1,024</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 rounded-full h-2">
+                                        <div class="bg-secondary h-2 rounded-full" style="width: 60%"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between mb-1">
+                                        <span class="font-medium">Résolutions</span>
+                                        <span class="font-bold">892</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 rounded-full h-2">
+                                        <div class="bg-secondary h-2 rounded-full" style="width: 85%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white p-6 rounded-lg shadow-md">
+                            <h3 class="text-xl font-bold text-primary mb-4">Démarrer une discussion</h3>
+                            <form>
+                                <div class="mb-4">
+                                    <label for="topic" class="block font-medium mb-2">Sujet</label>
+                                    <input type="text" id="topic" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-secondary" required>
+                                </div>
+                                <div class="mb-4">
+                                    <label for="category" class="block font-medium mb-2">Catégorie</label>
+                                    <select id="category" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-secondary">
+                                        <option>Formations</option>
+                                        <option>Projets</option>
+                                        <option>Emploi</option>
+                                        <option>Questions techniques</option>
+                                    </select>
+                                </div>
+                                <div class="mb-4">
+                                    <label for="message-forum" class="block font-medium mb-2">Message</label>
+                                    <textarea id="message-forum" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-secondary" required></textarea>
+                                </div>
+                                <button type="submit" class="w-full bg-secondary text-white px-6 py-3 rounded font-bold hover:bg-blue-600 transition-colors focus:outline-none focus:ring-2 focus:ring-primary">
+                                    Publier <i class="fas fa-paper-plane ml-2"></i>
+                                </button>
